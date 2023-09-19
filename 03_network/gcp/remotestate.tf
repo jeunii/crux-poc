@@ -1,4 +1,4 @@
-data "tfe_outputs" "folders" {
+data "tfe_outputs" "projects-gcp" {
   organization = "crux-ocm"
-  workspace    = "project_net"
+  workspace    = "projects-gcp"
 }
