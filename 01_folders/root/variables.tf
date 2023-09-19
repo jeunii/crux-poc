@@ -2,11 +2,15 @@ variable "org_id" {
   type = string
 }
 
-variable "folder_names" {
+variable "root_folder_name" {
   type    = list(string)
   default = ["crux-poc"]
 }
 
+variable "env_folder_names" {
+  type    = list(string)
+  default = ["gcp", "on-prem"]
+}
 
 variable "region" {
   type    = string
