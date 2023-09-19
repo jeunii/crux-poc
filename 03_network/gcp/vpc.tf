@@ -2,7 +2,7 @@ module "vpc" {
   source  = "terraform-google-modules/network/google"
   version = "7.3.0"
 
-  project_id   = data.tfe_outputs.projects-gcp.values
+  project_id   = data.tfe_outputs.projects-gcp.values.net_proj_id
   network_name = "shared-vpc"
   routing_mode = "GLOBAL"
 
