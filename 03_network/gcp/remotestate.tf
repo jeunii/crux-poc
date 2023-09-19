@@ -1,4 +1,4 @@
 data "tfe_outputs" "projects-gcp" {
   organization = "crux-ocm"
-  workspace    = "projects-gcp"
+  workspace    = "02_projects-gcp"
 }

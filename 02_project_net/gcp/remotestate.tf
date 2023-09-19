@@ -1,4 +1,4 @@
 data "tfe_outputs" "folders" {
   organization = "crux-ocm"
-  workspace    = "folders"
+  workspace    = "01_folders"
 }
