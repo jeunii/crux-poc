@@ -7,9 +7,6 @@ variable "folder_names" {
   default = ["crux-poc"]
 }
 
-variable "access_token" {
-  type = string
-}
 
 variable "region" {
   type    = string
