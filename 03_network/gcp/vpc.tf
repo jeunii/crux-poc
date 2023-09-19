@@ -8,61 +8,35 @@ module "vpc" {
 
   subnets = [
     {
-      subnet_name           = "subnet-01"
-      subnet_ip             = "10.0.0.0/20"
+      subnet_name           = "node"
+      subnet_ip             = "172.19.0.0/22"
       subnet_region         = var.region
       subnet_private_access = "true"
-    },
-    {
-      subnet_name           = "subnet-02"
-      subnet_ip             = "192.168.0.0/22"
-      subnet_region         = var.region
-      subnet_private_access = "true"
-    },
-    {
-      subnet_name           = "subnet-03"
-      subnet_ip             = "192.168.4.0/22"
-      subnet_region         = var.region
-      subnet_private_access = "true"
-    },
-    {
-      subnet_name           = "cloud-function-connector"
-      subnet_ip             = "192.168.255.240/28"
-      subnet_region         = var.region
-      subnet_private_access = "true"
-    },
+    }
   ]
 
   secondary_ranges = {
-    subnet-01 = [
+    node = [
       {
-        range_name    = "subnet-01-secondary-pods"
-        ip_cidr_range = "10.4.0.0/14"
+        range_name    = "node-reserved"
+        ip_cidr_range = "172.19.4.0/22"
       },
       {
-        range_name    = "subnet-01-secondary-svc-01"
-        ip_cidr_range = "10.8.0.0/14"
-      },
-    ]
-    subnet-02 = [
-      {
-        range_name    = "subnet-02-secondary-pods"
-        ip_cidr_range = "10.12.0.0/14"
+        range_name    = "service"
+        ip_cidr_range = "172.19.64.0/18"
       },
       {
-        range_name    = "subnet-02-secondary-svc-01"
-        ip_cidr_range = "10.16.0.0/14"
-      },
-    ]
-    subnet-03 = [
-      {
-        range_name    = "subnet-03-secondary-pods"
-        ip_cidr_range = "10.20.0.0/14"
+        range_name    = "service-reserved"
+        ip_cidr_range = "172.19.128.0/18"
       },
       {
-        range_name    = "subnet-03-secondary-svc-01"
-        ip_cidr_range = "10.24.0.0/14"
+        range_name    = "pod"
+        ip_cidr_range = "172.20.0.0/16"
       },
+      {
+        range_name    = "pod-reserved"
+        ip_cidr_range = "172.21.0.0/16"
+      }
     ]
   }
 }
