@@ -11,3 +11,8 @@ variable "region" {
   type    = string
   default = "us-east4"
 }
+
+variable "onprem_node_ip_range" {
+  type = string
+  default = "192.168.0.0/22"
+}
