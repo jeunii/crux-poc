@@ -9,9 +9,45 @@ module "vpc" {
   subnets = [
     {
       subnet_name           = "node"
-      subnet_ip             = "162.19.0.0/22"
+      subnet_ip             = var.onprem_node_ip_range
       subnet_region         = var.region
       subnet_private_access = "true"
     }
+  ]
+
+  ingress_rules	= [
+    {
+      name = "ingress-allow-all-internal"
+      description = "Allow all communication b/w internal nodes"
+      source_ranges = var.onprem_node_ip_range
+      allow = [
+        {
+          protocol = "tcp"
+        },
+        {
+          protocol = "udp"
+        },
+        {
+          protocol = "icmp"
+        },
+        {
+          protocol = "ipip"
+        }
+      ]
+    },
+    {
+      name = "ingress-allow-external"
+      description = "Allow selected communication from external"
+      source_ranges = "0.0.0.0/0"
+      allow = [
+        {
+          protocol = "tcp"
+          ports = ["22", "6443"]
+        },
+        {
+          protocol = "icmp"
+        },
+      ]
+    },
   ]
 }
