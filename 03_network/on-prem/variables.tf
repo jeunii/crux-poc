@@ -13,6 +13,6 @@ variable "region" {
 }
 
 variable "onprem_node_ip_range" {
-  type = "string"
+  type = string
   default = "162.19.0.0/22"
 }
