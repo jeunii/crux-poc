@@ -2,7 +2,7 @@ module "vpc" {
   source  = "terraform-google-modules/network/google"
   version = "7.3.0"
 
-  project_id   = data.tfe_outputs.projects-on-prem.values.net_proj_id
+  project_id   = data.tfe_outputs.net-project-on-prem.values.net_proj_id
   network_name = "shared-vpc"
   routing_mode = "GLOBAL"
 
@@ -38,7 +38,7 @@ module "vpc" {
     {
       name = "ingress-allow-external"
       description = "Allow selected communication from external"
-      source_ranges = ["0.0.0.0/0"]
+      source_ranges = ["0.0.0.0/0"
       allow = [
         {
           protocol = "tcp"
