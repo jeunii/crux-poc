@@ -19,7 +19,7 @@ module "vpc" {
     {
       name = "ingress-allow-all-internal"
       description = "Allow all communication b/w internal nodes"
-      source_ranges = var.onprem_node_ip_range
+      source_ranges = [var.onprem_node_ip_range]
       allow = [
         {
           protocol = "tcp"
@@ -38,7 +38,7 @@ module "vpc" {
     {
       name = "ingress-allow-external"
       description = "Allow selected communication from external"
-      source_ranges = "0.0.0.0/0"
+      source_ranges = ["0.0.0.0/0"]
       allow = [
         {
           protocol = "tcp"
