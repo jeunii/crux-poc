@@ -14,7 +14,6 @@ module "kubernetes-engine" {
   ip_range_services         = "service"
   create_service_account    = true
   gce_pd_csi_driver         = true
-  grant_registry_access     = true
   release_channel           = "STABLE"
   kubernetes_version        = "1.27.3-gke.100"
 }
