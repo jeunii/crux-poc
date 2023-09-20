@@ -3,9 +3,9 @@ data "tfe_outputs" "folders" {
   workspace    = "01_folders"
 }
 
-data "tfe_outputs" "projects-gcp" {
+data "tfe_outputs" "net-project-gcp" {
   organization = "crux-ocm"
-  workspace    = "02_projects-gcp"
+  workspace    = "02_net_project-gcp"
 }
 
 data "tfe_outputs" "network-gcp" {

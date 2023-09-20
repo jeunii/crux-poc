@@ -7,8 +7,8 @@ module "kubernetes-engine" {
   region                    = var.region
   zones                     = var.zones
   network                   = data.tfe_outputs.network-gcp.values.shared_vpc_name
-  network_project_id        = data.tfe_outputs.projects-gcp.values.net_proj_id
-  project_id                = data.tfe_outputs.projects-gcp.values.svc_proj_id
+  network_project_id        = data.tfe_outputs.net-project-gcp.values.net_proj_id
+  project_id                = data.tfe_outputs.svc-project-gcp.values.svc_proj_id
   subnetwork                = "node"
   ip_range_pods             = "pod"
   ip_range_services         = "service"
