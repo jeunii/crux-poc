@@ -38,7 +38,7 @@ module "vpc" {
     {
       name = "ingress-allow-external"
       description = "Allow selected communication from external"
-      source_ranges = ["0.0.0.0/0"
+      source_ranges = ["0.0.0.0/0"]
       allow = [
         {
           protocol = "tcp"
