@@ -16,6 +16,7 @@ resource "google_compute_instance" "k8s_master" {
   boot_disk {
     initialize_params {
       size = var.disk_size_gb
+      image = "debian-cloud/debian-11"
     }
   }
 
@@ -74,6 +75,7 @@ resource "google_compute_instance" "k8s_node" {
   boot_disk {
     initialize_params {
       size = var.disk_size_gb
+      image = "debian-cloud/debian-11"
     }
   }
 
