@@ -42,8 +42,7 @@ resource "google_compute_instance" "k8s_master" {
       apt-get install -y kubelet kubeadm kubectl
 
       # Initialize Kubernetes master
-      # Let's run them manually once cluster get's created
-      # kubeadm init --pod-network-cidr=192.168.4.0/22 --apiserver-advertise-address=${data.tfe_outputs.network-on-prem.values.k8s_master_external_ip}
+      kubeadm init --pod-network-cidr=192.168.4.0/22 --apiserver-advertise-address=${data.tfe_outputs.network-on-prem.values.k8s_master_external_ip}
 
       # # Copy kubeconfig to a location accessible by other nodes
       # mkdir -p /kube-config
