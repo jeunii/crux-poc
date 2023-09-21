@@ -8,7 +8,7 @@ resource "google_service_account" "on-prem-k8s-sa" {
 resource "google_compute_address" "k8s-master-internal-ip" {
   name         = "k8s-master-internal-ip"
   project      = data.tfe_outputs.svc-project-on-prem.values.svc_proj_id
-  subnetwork   = data.tfe_outputs.network-on-prem.values.subnets_ids[0]
+  subnetwork   = data.tfe_outputs.network-on-prem.values.on_prem_subnets_id[0]
   address_type = "INTERNAL"
   region       = var.region
 }
