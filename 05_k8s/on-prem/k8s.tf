@@ -5,6 +5,15 @@ resource "google_service_account" "on-prem-k8s-sa" {
 }
 
 
+resource "google_compute_address" "k8s-master-internal-ip" {
+  name         = "k8s-master-internal-ip"
+  project      = data.tfe_outputs.svc-project-on-prem.values.svc_proj_id
+  subnetwork   = data.tfe_outputs.network-on-prem.values.subnets_ids[0]
+  address_type = "INTERNAL"
+  region       = var.region
+}
+
+
 resource "google_compute_instance" "k8s_master" {
   name         = "${var.cluster_name}-master"
   machine_type = var.machine_type
@@ -22,7 +31,7 @@ resource "google_compute_instance" "k8s_master" {
 
   network_interface {
     subnetwork = data.tfe_outputs.network-on-prem.values.on_prem_subnets_id[0]
-    network_ip = data.tfe_outputs.network-on-prem.values.k8s_master_internal_ip
+    network_ip = google_compute_address.k8s-master-internal-ip
 
     access_config {
       nat_ip = data.tfe_outputs.network-on-prem.values.k8s_master_external_ip
