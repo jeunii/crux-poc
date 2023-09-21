@@ -1,6 +1,6 @@
 resource "google_service_account" "on-prem-k8s-sa" {
   account_id   = "on-prem-k8s-sa"
-  display_name = "OnPrem-k8s-SA"
+  display_name = "on-prem-k8s-sa"
 }
 
 
