@@ -55,7 +55,7 @@ module "vpc" {
 
 resource "google_compute_address" "k8s-master-internal-ip" {
   name         = "k8s-master-internal-ip"
-  project_id   = data.tfe_outputs.net-project-on-prem.values.net_proj_id
+  project   = data.tfe_outputs.net-project-on-prem.values.net_proj_id
   subnetwork   = module.vpc.subnets_ids[0]
   address_type = "INTERNAL"
   region       = var.region
@@ -64,5 +64,5 @@ resource "google_compute_address" "k8s-master-internal-ip" {
 
 resource "google_compute_address" "k8s-master-external-ip" {
   name         = "k8s-master-external-ip"
-  project_id   = data.tfe_outputs.net-project-on-prem.values.net_proj_id
+  project   = data.tfe_outputs.net-project-on-prem.values.net_proj_id
 }
