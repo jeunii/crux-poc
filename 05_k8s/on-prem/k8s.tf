@@ -1,6 +1,7 @@
 resource "google_service_account" "on-prem-k8s-sa" {
   account_id   = "on-prem-k8s-sa"
   display_name = "on-prem-k8s-sa"
+  project = data.tfe_outputs.svc-project-on-prem.values.svc_proj_id
 }
 
 
