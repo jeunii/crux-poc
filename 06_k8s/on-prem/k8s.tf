@@ -20,7 +20,11 @@ resource "google_compute_instance" "k8s_master" {
 
   network_interface {
     subnetwork = data.tfe_outputs.network-on-prem.values.on_prem_subnets_id[0]
-    network_ip = "192.168.0.5"
+    network_ip = data.tfe_outputs.network-on-prem.values.k8s_master_internal_ip
+
+    access_config {
+      nat_ip = data.tfe_outputs.network-on-prem.values.k8s_master_external_ip
+    }
   }
 
   # Metadata for initializing the Kubernetes master
@@ -39,7 +43,7 @@ resource "google_compute_instance" "k8s_master" {
 
       # Initialize Kubernetes master
       # Let's run them manually once cluster get's created
-      # kubeadm init --pod-network-cidr=192.168.8.0/22 --apiserver-advertise-address=192.168.0.5
+      # kubeadm init --pod-network-cidr=192.168.4.0/22 --apiserver-advertise-address=${data.tfe_outputs.network-on-prem.values.k8s_master_external_ip}
 
       # # Copy kubeconfig to a location accessible by other nodes
       # mkdir -p /kube-config
@@ -63,6 +67,8 @@ resource "google_compute_instance" "k8s_node" {
 
   network_interface {
     subnetwork = data.tfe_outputs.network-on-prem.values.on_prem_subnets_id[0]
+    access_config {
+    }
   }
 
   boot_disk {
