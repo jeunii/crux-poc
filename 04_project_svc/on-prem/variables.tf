@@ -19,5 +19,5 @@ variable "region" {
 
 variable "svc_project_apis" {
   type    = list(string)
-  default = ["serviceusage.googleapis.com", "krmapihosting.googleapis.com", "dns.googleapis.com", "compute.googleapis.com", "cloudfunctions.googleapis.com", "secretmanager.googleapis.com", "sourcerepo.googleapis.com", "cloudbuild.googleapis.com", "servicenetworking.googleapis.com", "sqladmin.googleapis.com", "container.googleapis.com", "gkeconnect.googleapis.com", "cloudresourcemanager.googleapis.com", "iam.googleapis.com", "multiclusterservicediscovery.googleapis.com", "trafficdirector.googleapis.com", "multiclusteringress.googleapis.com"]
+  default = ["serviceusage.googleapis.com", "dns.googleapis.com", "compute.googleapis.com", "container.googleapis.com", "cloudresourcemanager.googleapis.com", "iam.googleapis.com"]
 }
