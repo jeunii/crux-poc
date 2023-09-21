@@ -9,5 +9,5 @@ module "svc_project" {
   shared_vpc          = data.tfe_outputs.net-project-on-prem.values.net_proj_id
   activate_apis       = var.svc_project_apis
   folder_id           = data.tfe_outputs.folders.values.env_folder_ids["on-prem"]
-  shared_vpc_subnets  = data.tfe_outputs.network-on-prem.values.gke_subnets_id
+  shared_vpc_subnets  = data.tfe_outputs.network-on-prem.values.on_prem_subnets_id
 }
