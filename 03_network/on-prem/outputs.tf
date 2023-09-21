@@ -9,11 +9,11 @@ output "on_prem_subnets" {
 }
 
 output "k8s_master_internal_ip" {
-  value = google_compute_address.k8s-master-internal-ip
+  value = google_compute_address.k8s-master-internal-ip.address
   sensitive = true
 }
 
 output "k8s_master_external_ip" {
-  value = google_compute_address.k8s-master-external-ip
+  value = google_compute_address.k8s-master-external-ip.address
   sensitive = true
 }
