@@ -44,7 +44,7 @@ module "vpn_ha-2" {
   project_id          = data.tfe_outputs.net-project-on-prem.values.net_proj_id
   region              = var.region
   network             = data.tfe_outputs.network-on-prem.values.shared_vpc_name
-  name                = "net2-to-net1"
+  name                = "on-prem-to-gcp"
   router_asn          = 64513
   peer_gcp_gateway    = module.vpn_ha-1.self_link
 
