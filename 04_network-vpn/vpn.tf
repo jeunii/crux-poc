@@ -54,9 +54,11 @@ module "vpn_ha-2" {
         address = "169.254.1.2"
         asn     = 64514
       }
+      bgp_peer_options                = null
       bgp_session_range               = "169.254.1.1/30"
       ike_version                     = 2
       vpn_gateway_interface           = 0
+      peer_external_gateway_interface = null
       shared_secret                   = var.secret
     }
 
@@ -65,9 +67,11 @@ module "vpn_ha-2" {
         address = "169.254.2.2"
         asn     = 64514
       }
+      bgp_peer_options                = null
       bgp_session_range               = "169.254.2.1/30"
       ike_version                     = 2
       vpn_gateway_interface           = 1
+      peer_external_gateway_interface = null
       shared_secret                   = var.secret
     }
 
