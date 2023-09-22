@@ -12,3 +12,7 @@ output "k8s_master_external_ip" {
   value = google_compute_address.k8s-master-external-ip.address
   sensitive = true
 }
+
+output "shared_vpc_name" {
+  value = module.vpc.network_name
+}
