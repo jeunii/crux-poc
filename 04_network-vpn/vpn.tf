@@ -42,7 +42,7 @@ module "vpn_ha-2" {
   source              = "terraform-google-modules/vpn/google//modules/vpn_ha"
   version             = "~> 1.3.0"
   project_id          = data.tfe_outputs.net-project-on-prem.values.net_proj_id
-  region              = "europe-west4"
+  region              = var.region
   network             = data.tfe_outputs.network-on-prem.values.shared_vpc_name
   name                = "net2-to-net1"
   router_asn          = 64513
