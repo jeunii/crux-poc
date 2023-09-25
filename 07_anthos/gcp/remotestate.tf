@@ -20,5 +20,5 @@ data "tfe_outputs" "network-gcp" {
 
 data "tfe_outputs" "svc-k8s-gcp" {
   organization = "crux-ocm"
-  workspace    = "06_k8s-gcp"
+  workspace    = "05_k8s-gcp"
 }
