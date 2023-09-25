@@ -14,3 +14,8 @@ output "svc_cluster_location" {
 output "svc_cluster_name" {
   value = module.kubernetes-engine.name
 }
+
+output "svc_cluster_ca" {
+  value = module.kubernetes-engine.ca_certificate
+  sensitive = true
+}

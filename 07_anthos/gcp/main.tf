@@ -1,3 +1,11 @@
+data "google_client_config" "default" {}
+
+provider "kubernetes" {
+  host                   = "https://${data.tfe_outputs.svc-k8s-gcp.values.svc_cluster_endpoint}"
+  token                  = data.google_client_config.default.access_token
+  cluster_ca_certificate = base64decode(data.tfe_outputs.svc-k8s-gcp.values.svc_cluster_ca)
+}
+
 module "acm" {
   # https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/tree/master/modules/acm
   source                    = "terraform-google-modules/kubernetes-engine/google//modules/acm"
