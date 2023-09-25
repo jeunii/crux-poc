@@ -11,7 +11,7 @@ variable "node_count" {
 
 variable "machine_type" {
   description = "Machine type for nodes"
-  default     = "n1-standard-2"
+  default     = "n2-standard-4"
 }
 
 variable "disk_size_gb" {
