@@ -38,27 +38,7 @@ resource "google_compute_instance" "k8s_master" {
     }
   }
 
-  # Metadata for initializing the Kubernetes master
   metadata = {
-    startup-script = <<-EOF
-      #!/bin/bash
-      # Install Docker
-      apt-get update
-      apt-get install -y docker.io
-
-      # Install Kubernetes components
-      curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-      echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' > /etc/apt/sources.list.d/kubernetes.list
-      apt-get update
-      apt-get install -y kubelet kubeadm kubectl
-
-      # Initialize Kubernetes master
-      kubeadm init --pod-network-cidr=192.168.4.0/22 --apiserver-advertise-address=${data.tfe_outputs.network-on-prem.values.k8s_master_external_ip}
-
-      # # Copy kubeconfig to a location accessible by other nodes
-      # mkdir -p /kube-config
-      # cp /etc/kubernetes/admin.conf /kube-config
-    EOF
   }
   service_account {
     email  = google_service_account.on-prem-k8s-sa.email
@@ -89,21 +69,6 @@ resource "google_compute_instance" "k8s_node" {
   }
 
   metadata = {
-    startup-script = <<-EOF
-      #!/bin/bash
-      # Install Docker
-      apt-get update
-      apt-get install -y docker.io
-
-      # Install Kubernetes components
-      curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-      echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' > /etc/apt/sources.list.d/kubernetes.list
-      apt-get update
-      apt-get install -y kubelet kubeadm kubectl
-
-      # Join the worker nodes to the Kubernetes master
-      <Run kubeadm join command provided by the master here>
-    EOF
   }
   service_account {
     email  = google_service_account.on-prem-k8s-sa.email
