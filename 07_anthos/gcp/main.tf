@@ -14,9 +14,10 @@ module "acm" {
   cluster_name              = data.tfe_outputs.svc-k8s-gcp.values.svc_cluster_name
   location                  = data.tfe_outputs.svc-k8s-gcp.values.svc_cluster_location
   enable_policy_controller  = false
-  sync_repo                 = "git@github.com:GoogleCloudPlatform/anthos-config-management-samples.git"
-  sync_branch               = "1.0.0"
-  policy_dir                = "foo-corp"
+  sync_repo                 = "https://github.com/terraform-google-modules/terraform-google-kubernetes-engine.git"
+  sync_branch               = "master"
+  policy_dir                = "examples/acm-terraform-blog-part1/config-root"
+  secret_type               = "none"
 
   create_metrics_gcp_sa = false
 }
