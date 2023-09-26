@@ -6,17 +6,17 @@ variable "cluster_name" {
 
 variable "node_count" {
   description = "Number of nodes in the cluster"
-  default     = 3
+  default     = 1
 }
 
 variable "machine_type" {
   description = "Machine type for nodes"
-  default     = "n1-standard-2"
+  default     = "n2-standard-4"
 }
 
 variable "disk_size_gb" {
   description = "Disk size (in GB) for nodes"
-  default     = 20
+  default     = 50
 }
 
 variable "region" {
