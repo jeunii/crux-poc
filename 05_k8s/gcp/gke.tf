@@ -16,5 +16,5 @@ module "kubernetes-engine" {
   gce_pd_csi_driver         = true
   release_channel           = "STABLE"
   kubernetes_version        = "1.27.3-gke.100"
-  cluster_resource_labels   = { "mesh_id" : "proj-${data.tfe_outputs.svc-project-gcp.values.project_number}" }
+  cluster_resource_labels   = { "mesh_id" : "proj-${data.tfe_outputs.svc-project-gcp.values.svc_proj_id}" }
 }
