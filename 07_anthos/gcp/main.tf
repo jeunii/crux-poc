@@ -13,10 +13,10 @@ module "acm" {
   cluster_name              = data.tfe_outputs.svc-k8s-gcp.values.svc_cluster_name
   location                  = data.tfe_outputs.svc-k8s-gcp.values.svc_cluster_location
   enable_policy_controller  = false
-  sync_repo                 = "https://github.com/terraform-google-modules/terraform-google-kubernetes-engine.git"
-  sync_branch               = "master"
-  policy_dir                = "examples/acm-terraform-blog-part1/config-root/"
-  secret_type               = "none"
+  sync_repo                 = "git@github.com:jeunii/crux-poc.git"
+  sync_branch               = "build"
+  policy_dir                = "asm_code_base/gcp/"
+  secret_type               = "ssh"
   source_format             = "unstructured"
 
   create_metrics_gcp_sa = false
