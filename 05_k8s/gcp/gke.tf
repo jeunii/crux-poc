@@ -17,13 +17,13 @@ module "kubernetes-engine" {
   gce_pd_csi_driver         = true
   release_channel           = "STABLE"
   kubernetes_version        = "1.27.3-gke.100"
-  cluster_resource_labels   = { "mesh_id" : "proj-${data.tfe_outputs.svc-project-gcp.values.svc_proj_id}" }
+  cluster_resource_labels   = { "mesh_id" : "proj-${data.tfe_outputs.svc-project-gcp.values.svc_proj_number}" }
 
   node_pools = [
     {
       name                      = "default-node-pool"
       machine_type              = "n2-standard-4"
-      node_locations            = "us-east1-a,us-east1-b"
+      node_locations            = "us-east4-a,us-east4-b"
       min_count                 = 1
       max_count                 = 6
       spot                      = true
