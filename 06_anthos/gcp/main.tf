@@ -15,8 +15,6 @@ module "acm" {
   enable_policy_controller  = false
   sync_repo                 = "git@github.com:jeunii/crux-poc.git"
   sync_branch               = "build"
-  sync_rev                  = "HEAD"
-  sync_wait_secs            = "15"
   policy_dir                = "asm_code_base/gcp/"
   secret_type               = "ssh"
   source_format             = "unstructured"
