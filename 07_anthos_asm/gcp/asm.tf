@@ -11,3 +11,10 @@ resource "null_resource" "permissions" {
     command = "chmod +x asmcli"
   }
 }
+
+resource "null_resource" "install" {
+
+  provisioner "local-exec" {
+    command = "./asmcli validate --fleet_id svc-gcp-d349 --project_id svc-gcp-d349 --cluster_name svc-demo --output_dir /tmp --cluster_location us-east4"
+  }
+}
