@@ -2,6 +2,7 @@ data "google_client_config" "default" {}
 
 provider "kubernetes" {
   host                   = "https://${data.tfe_outputs.svc-k8s-gcp.values.svc_cluster_endpoint}"
+  token                  = var.token
   cluster_ca_certificate = base64decode(data.tfe_outputs.svc-k8s-gcp.values.svc_cluster_ca)
 }
 
