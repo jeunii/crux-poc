@@ -46,5 +46,3 @@ spec:
     istio.io/rev: asm-1182-4
   sessionAffinity: None
   type: ClusterIP
-status:
-  loadBalancer: {}

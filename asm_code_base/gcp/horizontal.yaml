@@ -32,32 +32,3 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: istiod-asm-1182-4
-status:
-  conditions:
-  - lastTransitionTime: "2023-09-28T21:08:15Z"
-    message: recommended size matches current size
-    reason: ReadyForNewScale
-    status: "True"
-    type: AbleToScale
-  - lastTransitionTime: "2023-09-28T21:02:44Z"
-    message: the HPA was able to successfully calculate a replica count from cpu resource
-      utilization (percentage of request)
-    reason: ValidMetricFound
-    status: "True"
-    type: ScalingActive
-  - lastTransitionTime: "2023-09-28T21:08:15Z"
-    message: the desired replica count is less than the minimum replica count
-    reason: TooFewReplicas
-    status: "True"
-    type: ScalingLimited
-  currentMetrics:
-  - resource:
-      current:
-        averageUtilization: 0
-        averageValue: 2m
-        value: 3m
-      name: cpu
-    type: Resource
-  currentReplicas: 2
-  desiredReplicas: 2
-  lastScaleTime: "2023-09-28T21:01:59Z"
