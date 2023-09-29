@@ -30,7 +30,6 @@ metadata:
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
       {"apiVersion":"v1","data":{"mesh":"defaultConfig:\n  discoveryAddress: istiod-asm-1182-4.istio-system.svc:15012\n  meshId: proj-114188760578\n  proxyMetadata:\n    CA_PROVIDER: GoogleCA\n    GCE_METADATA_HOST: metadata.google.internal\n    GCP_METADATA: svc-gcp-d349|114188760578|svc-demo|us-east4\n    GKE_CLUSTER_URL: https://container.googleapis.com/v1/projects/svc-gcp-d349/locations/us-east4/clusters/svc-demo\n    PLUGINS: GoogleTokenExchange\n  tracing:\n    zipkin:\n      address: zipkin.istio-system:9411\ndefaultProviders:\n  metrics:\n  - stackdriver\nenablePrometheusMerge: true\nlocalityLbSetting:\n  enabled: false\nrootNamespace: istio-system\ntrustDomain: svc-gcp-d349.svc.id.goog\ntrustDomainAliases:\n- svc-gcp-d349.svc.id.goog\n- svc-gcp-d349.hub.id.goog","meshNetworks":"networks: {}"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"install.operator.istio.io/owning-resource":"unknown","install.operator.istio.io/owning-resource-namespace":"istio-system","istio.io/rev":"asm-1182-4","operator.istio.io/component":"Pilot","operator.istio.io/managed":"Reconcile","operator.istio.io/version":"1.18.2-asm.4","release":"istio"},"name":"istio-asm-1182-4","namespace":"istio-system"}}
-  creationTimestamp: "2023-09-28T21:01:41Z"
   labels:
     install.operator.istio.io/owning-resource: unknown
     install.operator.istio.io/owning-resource-namespace: istio-system
@@ -41,30 +40,22 @@ metadata:
     release: istio
   name: istio-asm-1182-4
   namespace: istio-system
-  resourceVersion: "75232"
-  uid: 6e1ff808-406b-45a0-8bfa-7762e134a7f4
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   annotations:
     control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"istiod-asm-1182-4-7d496cb889-5dr9f","holderKey":"asm-1182-4","leaseDurationSeconds":30,"acquireTime":"2023-09-28T21:01:45Z","renewTime":"2023-09-28T21:10:31Z","leaderTransitions":0}'
-  creationTimestamp: "2023-09-28T21:01:45Z"
   name: istio-gateway-status-leader
   namespace: istio-system
-  resourceVersion: "81074"
-  uid: 73a168dc-8151-4308-acec-7ec6c41f9135
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   annotations:
     control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"istiod-asm-1182-4-7d496cb889-5dr9f","holderKey":"asm-1182-4","leaseDurationSeconds":30,"acquireTime":"2023-09-28T21:01:45Z","renewTime":"2023-09-28T21:10:54Z","leaderTransitions":0}'
-  creationTimestamp: "2023-09-28T21:01:45Z"
   name: istio-leader
   namespace: istio-system
-  resourceVersion: "81316"
-  uid: 60c4e71c-ee78-4b24-9696-c7ee200ec80b
 ---
 apiVersion: v1
 data:
@@ -1884,7 +1875,6 @@ data:
     }
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2023-09-28T21:01:41Z"
   labels:
     install.operator.istio.io/owning-resource: unknown
     install.operator.istio.io/owning-resource-namespace: istio-system
@@ -1895,5 +1885,3 @@ metadata:
     release: istio
   name: istio-sidecar-injector-asm-1182-4
   namespace: istio-system
-  resourceVersion: "75235"
-  uid: 2a42bea1-41ec-4422-b534-8f5590d3a2a4

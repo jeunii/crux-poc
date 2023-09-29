@@ -6,7 +6,6 @@ items:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
         {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"app":"istio-reader","install.operator.istio.io/owning-resource-namespace":"istio-system","istio.io/rev":"asm-1182-4","operator.istio.io/component":"Base","operator.istio.io/managed":"Reconcile","operator.istio.io/version":"1.18.2-asm.4","release":"istio"},"name":"istio-reader-service-account","namespace":"istio-system"}}
-    creationTimestamp: "2023-09-28T21:01:39Z"
     labels:
       app: istio-reader
       install.operator.istio.io/owning-resource-namespace: istio-system
@@ -17,15 +16,12 @@ items:
       release: istio
     name: istio-reader-service-account
     namespace: istio-system
-    resourceVersion: "75192"
-    uid: 39ceb0e4-eaa0-4209-88dd-ee3b72d47a70
 - apiVersion: v1
   kind: ServiceAccount
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
         {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"app":"istiod","install.operator.istio.io/owning-resource-namespace":"istio-system","istio.io/rev":"asm-1182-4","operator.istio.io/component":"Pilot","operator.istio.io/managed":"Reconcile","operator.istio.io/version":"1.18.2-asm.4","release":"istio"},"name":"istiod-asm-1182-4","namespace":"istio-system"}}
-    creationTimestamp: "2023-09-28T21:01:41Z"
     labels:
       app: istiod
       install.operator.istio.io/owning-resource-namespace: istio-system
@@ -36,15 +32,12 @@ items:
       release: istio
     name: istiod-asm-1182-4
     namespace: istio-system
-    resourceVersion: "75218"
-    uid: 827f783e-fe6a-4e98-a4f9-71fbd362fa95
 - apiVersion: v1
   kind: ServiceAccount
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
         {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"app":"istiod","install.operator.istio.io/owning-resource-namespace":"istio-system","istio.io/rev":"asm-1182-4","operator.istio.io/component":"Base","operator.istio.io/managed":"Reconcile","operator.istio.io/version":"1.18.2-asm.4","release":"istio"},"name":"istiod-service-account","namespace":"istio-system"}}
-    creationTimestamp: "2023-09-28T21:01:39Z"
     labels:
       app: istiod
       install.operator.istio.io/owning-resource-namespace: istio-system
@@ -55,8 +48,6 @@ items:
       release: istio
     name: istiod-service-account
     namespace: istio-system
-    resourceVersion: "75194"
-    uid: d85bd211-9799-4429-8317-ac18cd9fa95c
 kind: List
 metadata:
   resourceVersion: ""
