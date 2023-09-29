@@ -19,6 +19,7 @@ module "acm" {
   policy_dir                = "asm_code_base/gcp/"
   secret_type               = "ssh"
   source_format             = "unstructured"
+  create_ssh_key            = true
 
   create_metrics_gcp_sa = false
 }
