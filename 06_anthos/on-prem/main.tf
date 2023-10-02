@@ -12,7 +12,7 @@ module "acm" {
 
   project_id                = data.tfe_outputs.svc-project-gcp.values.svc_proj_id
   cluster_name              = "on-prem-k8s-cluster"
-  location                  = "us-east4-a"
+  location                  = "global"
   enable_fleet_feature      = false
   enable_policy_controller  = false
   sync_repo                 = "git@github.com:jeunii/crux-poc.git"
