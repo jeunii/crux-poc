@@ -9,12 +9,14 @@ provider "kubernetes" {
 module "acm" {
   # https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/tree/master/modules/acm
   source                    = "terraform-google-modules/kubernetes-engine/google//modules/acm"
-
   project_id                = data.tfe_outputs.svc-project-gcp.values.svc_proj_id
-  cluster_name              = "on-prem-k8s-cluster"
-  location                  = "us-east4-a"
+  cluster_name              = data.tfe_outputs.svc-k8s-gcp.values.svc_cluster_name
+  location                  = data.tfe_outputs.svc-k8s-gcp.values.svc_cluster_location
+
+  cluster_membership_id     = "on-prem-k8s-cluster"
   enable_fleet_feature      = false
   enable_policy_controller  = false
+  enable_fleet_registration = false
   sync_repo                 = "git@github.com:jeunii/crux-poc.git"
   sync_branch               = "build"
   policy_dir                = "asm_code_base/on-prem/"
