@@ -32,7 +32,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: details
+  name: details-cb
   namespace: cloud-run
   labels:
     app: details
@@ -55,7 +55,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: details-v1
+  name: details-v1-cb
   namespace: cloud-run
   labels:
     app: details
@@ -86,7 +86,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ratings
+  name: ratings-cb
   namespace: cloud-run
   labels:
     app: ratings
@@ -109,7 +109,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ratings-v1
+  name: ratings-v1-cb
   namespace: cloud-run
   labels:
     app: ratings
@@ -140,7 +140,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: reviews
+  name: reviews-cb
   namespace: cloud-run
   labels:
     app: reviews
@@ -163,7 +163,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reviews-v1
+  name: reviews-v1-cb
   namespace: cloud-run
   labels:
     app: reviews
@@ -204,7 +204,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reviews-v2
+  name: reviews-v2-cb
   namespace: cloud-run
   labels:
     app: reviews
@@ -245,7 +245,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reviews-v3
+  name: reviews-v3-cb
   namespace: cloud-run
   labels:
     app: reviews
@@ -289,7 +289,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: productpage
+  name: productpage-cb
   namespace: cloud-run
   labels:
     app: productpage
@@ -312,7 +312,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: productpage-v1
+  name: productpage-v1-cb
   namespace: cloud-run
   labels:
     app: productpage
