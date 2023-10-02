@@ -10,7 +10,7 @@ module "acm" {
   # https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/tree/master/modules/acm
   source                    = "terraform-google-modules/kubernetes-engine/google//modules/acm"
 
-  project_id                = data.tfe_outputs.svc-project-on-prem.values.svc_proj_id
+  project_id                = data.tfe_outputs.svc-project-gcp.values.svc_proj_id
   cluster_name              = "on-prem-k8s-cluster"
   location                  = "us-east4-a"
   enable_fleet_feature      = false

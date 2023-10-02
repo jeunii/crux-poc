@@ -7,3 +7,9 @@ data "tfe_outputs" "svc-project-on-prem" {
   organization = "crux-ocm"
   workspace    = "04_svc_project-on-prem"
 }
+
+/* Testing */
+data "tfe_outputs" "svc-project-gcp" {
+  organization = "crux-ocm"
+  workspace    = "04_svc_project-gcp"
+}
