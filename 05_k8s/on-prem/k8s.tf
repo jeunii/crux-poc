@@ -32,10 +32,6 @@ resource "google_compute_instance" "k8s_master" {
   network_interface {
     subnetwork = data.tfe_outputs.network-on-prem.values.on_prem_subnets_id[0]
     network_ip = google_compute_address.k8s-master-internal-ip.address
-
-    access_config {
-      nat_ip = data.tfe_outputs.network-on-prem.values.k8s_master_external_ip
-    }
   }
 
   metadata = {

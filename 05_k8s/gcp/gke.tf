@@ -1,6 +1,6 @@
 module "kubernetes-engine" {
   # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-  source  = "terraform-google-modules/kubernetes-engine/google"
+  source  = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
   version = "27.0.0"
   
   name                      = "svc-demo"
