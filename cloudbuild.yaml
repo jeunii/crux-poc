@@ -1,0 +1,11 @@
+steps:
+- name: 'bash'
+  script: |
+    #!/usr/bin/env bash
+    echo "Hello World"
+- name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=sample/
+  - --location=us-east4
+  - --cluster=svc-demo
