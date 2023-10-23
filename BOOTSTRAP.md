@@ -305,8 +305,160 @@ Click on create workspace. Once created, click on New Run and choose run type Pl
 
 ### Deploy kubernetes on prem
 
-// TODO
-// Add commands to install k8s
+#### Commands to run both in Master and Worker node(s)
+
+In this step, you will login to the master node and all the worker node(s) and run the following commands,
+
+```
+mkdir setup
+cd setup/
+wget https://github.com/containerd/containerd/releases/download/v1.6.8/containerd-1.6.8-linux-amd64.tar.gz
+sudo tar Cxzvf /usr/local containerd-1.6.8-linux-amd64.tar.gz
+wget https://github.com/opencontainers/runc/releases/download/v1.1.3/runc.amd64
+sudo install -m 755 runc.amd64 /usr/local/sbin/runc
+wget https://github.com/containernetworking/plugins/releases/download/v1.1.1/cni-plugins-linux-amd64-v1.1.1.tgz
+sudo mkdir -p /opt/cni/bin
+sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.1.1.tgz
+sudo mkdir /etc/containerd
+containerd config default | sudo tee /etc/containerd/config.toml
+sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+sudo curl -L https://raw.githubusercontent.com/containerd/containerd/main/containerd.service -o /etc/systemd/system/containerd.service
+sudo systemctl daemon-reload
+sudo systemctl enable --now containerd
+sudo systemctl status containerd
+curl -fsSL https://dl.k8s.io/apt/doc/apt-key.gpg | sudo apt-key add -
+cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+cat /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-get install  -y kubelet=1.27.3-00 kubeadm=1.27.3-00 kubectl=1.27.3-00
+sudo apt-mark hold kubelet kubeadm kubectl
+sudo apt update
+sudo apt install -y docker.io
+```
+
+#### Commands to run in Master node
+
+In this step, you will login to the master node and run the following commands,
+
+```
+# --apiserver-cert-extra-sans is optional, use only if you are exposing the k8s master externally.
+# Note down the kubeadm join command from the output. It will be used later.
+sudo kubeadm init --pod-network-cidr=192.168.4.0/22 --apiserver-advertise-address=0.0.0.0 --apiserver-cert-extra-sans=<MASTER EXTERNAL IP>
+
+# Create the kubeconfig file to run kubectl commands from master node
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+# Install the k8s network operator
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/custom-resources.yaml -O
+# Update the pod CIDR
+sed -i 's/cidr: .*/cidr: 192.168.4.0\/22/g' custom-resources.yaml
+kubectl create -f custom-resources.yaml
+```
+
+#### Commands to run in Worker node(s)
+
+In this step, you will login to all the worker node(s) and run the following commands,
+
+```
+# Use the kubeadm join command from the output of kubeadm init in master node. A sample kubeadm join look as follows,
+
+sudo kubeadm join 10.128.0.2:6443 --token r2kk47.uq7v6k9ev0h1q8fm         --discovery-token-ca-cert-hash sha256:5a413af08a465acb7e481e130f68ab18d9d25787893daa60825582e5e1a77644
+```
+
+#### Verify the k8s installation
+
+Login to the master node and run the following commands to verify if all the worker nodes are registed with master and are in READY state.
+
+```
+kubectl get node -o wide
+```
+
+#### Registe the on-prem cluster with Anthos
+
+Run the following command to register the on-prem cluster with Anthos fleet
+
+```
+gcloud container fleet memberships register on-prem-k8s-cluster        --context=kubernetes-admin@kubernetes   --kubeconfig=~/.kube/config --project=svc-gcp-d349 --enable-workload-identity    --has-private-issuer
+```
+
+Go to the Anthos UI, and verify that the on-prem cluster is showing up as part of the fleet.
+
+Setup the connect gateway to login to the registerd on-prem cluster. Add additional users as required.
+
+```
+cat << EOF > connect-gateway-rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: gateway-impersonate
+rules:
+- apiGroups:
+  - ""
+  resourceNames:
+  - lakshmanan@onixnet.us
+  - junaid.subhani@onixnet.com
+  - alex@cruxocm.ai
+  resources:
+  - users
+  verbs:
+  - impersonate
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: gateway-impersonate
+roleRef:
+  kind: ClusterRole
+  name: gateway-impersonate
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  name: connect-agent-sa
+  namespace: gke-connect
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: gateway-cluster-admin
+subjects:
+- kind: User
+  name: lakshmanan@onixnet.us
+- kind: User
+  name: junaid.subhani@onixnet.com
+- kind: User
+  name: alex@cruxocm.ai
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+
+EOF
+```
+
+Apply the rbac to the on-prem cluster
+
+```
+kubectl apply -f connect-gateway-rbac.yaml
+```
+
+Now from the Anthos UI, you can login to the on-prem cluster with your google credentials.
+
+
+#### Enable Anthos Features on the on-prem cluster
+
+```
+curl https://storage.googleapis.com/csm-artifacts/asm/asmcli_1.18 > asmcli
+chmod +x ./asmcli
+
+./asmcli install   --kubeconfig ~/.kube/config   --fleet_id svc-gcp-d349   --output_dir ./output/   --platform multicloud --option attached-cluster --enable_all --ca mesh_ca
+```
 
 ### 06_anthos-gcp
 
